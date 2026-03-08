@@ -14,17 +14,13 @@
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
-
 <div class="page">
-
   <header class="header">
     <div class="header-logo">VTX <span>Check</span> Web</div>
     <div class="header-sub">Extrator de dados de dispositivo</div>
   </header>
-
   <div class="container">
 
-    <!-- DROP ZONE -->
     <div class="drop-zone" id="dropZone">
       <div class="drop-placeholder" id="placeholderText">
         <div class="drop-icon">📱</div>
@@ -34,24 +30,14 @@
     </div>
     <input type="file" id="imageInput" accept="image/*">
 
-    <!-- BOTÕES -->
     <div class="btn-row">
       <button class="btn btn-upload" id="btnUpload">📁 Escolher / Foto</button>
       <button class="btn btn-extract" id="btnCapturar" disabled>🪄 Extrair</button>
     </div>
 
-    <!-- STATUS -->
-    <div class="status-bar" id="statusBar">
-      <div class="dot"></div>
-      <span id="statusMsg">Aguardando imagem...</span>
-    </div>
+    <div class="status-bar" id="statusBar"><div class="dot"></div><span id="statusMsg">Aguardando imagem...</span></div>
+    <div class="progress-wrap" id="progressWrap"><div class="progress-bar" id="progressBar"></div></div>
 
-    <!-- PROGRESS -->
-    <div class="progress-wrap" id="progressWrap">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <!-- TEMPLATE -->
     <div>
       <div class="field-label">Modelo de Script</div>
       <textarea id="scriptTemplate">SMARTPHONE {MODELO DO CELULAR}
@@ -60,7 +46,6 @@ IMEI 1: {IMEI 1}
 IMEI 2: {IMEI 2}</textarea>
     </div>
 
-    <!-- RESULTADO -->
     <div class="result-box" id="resultBox">
       <div class="result-header">
         <span>Dados extraídos</span>
@@ -76,7 +61,6 @@ IMEI 2: {IMEI 2}</textarea>
 
   </div>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>

@@ -87,7 +87,6 @@ const extractData = text => {
 
   let imei1 = t.match(/IMEI\s*1[\s:.\-]*(\d[\d\s]{13,16}\d)/i)?.[1].replace(/\s/g,'').slice(0,15) ?? null;
   let imei2 = t.match(/IMEI\s*2[\s:.\-]*(\d[\d\s]{13,16}\d)/i)?.[1].replace(/\s/g,'').slice(0,15) ?? null;
-
   if (!imei1 || !imei2) {
     const all = [...t.matchAll(/\b(\d[\d ]{13,16}\d)\b/g)]
       .map(m => m[1].replace(/\s/g,'')).filter((d,_,a) => d.length===15 && a.indexOf(d)===a.lastIndexOf(d));
@@ -100,18 +99,12 @@ const extractData = text => {
 
 const renderResult = (dados, rawText) => {
   resultFields.innerHTML = '';
-  const fields = [
-    ['modelo','Modelo'], ['sn','Número de Série (SN)'], ['imei1','IMEI 1'], ['imei2','IMEI 2']
-  ];
   let found = 0;
-  for (const [key, label] of fields) {
+  for (const [key, label] of [['modelo','Modelo'],['sn','Número de Série (SN)'],['imei1','IMEI 1'],['imei2','IMEI 2']]) {
     const val = dados[key];
     if (val) found++;
-    resultFields.insertAdjacentHTML('beforeend', `
-      <div class="result-field">
-        <div class="result-field-name">${label}</div>
-        <div class="result-field-value ${val ? 'found' : 'not-found'}">${val || 'Não encontrado'}</div>
-      </div>`);
+    resultFields.insertAdjacentHTML('beforeend',
+      `<div class="result-field"><div class="result-field-name">${label}</div><div class="result-field-value ${val?'found':'not-found'}">${val||'Não encontrado'}</div></div>`);
   }
   resultBadge.textContent = found >= 3 ? '✓ OK' : `⚠ ${found}/4`;
   resultBadge.className = 'result-badge ' + (found >= 3 ? 'ok' : 'fail');
@@ -134,7 +127,7 @@ rawToggle.addEventListener('click', () => {
 
 btnCopyResult.addEventListener('click', async () => {
   try { await navigator.clipboard.writeText(scriptFinal); }
-  catch { const ta = Object.assign(document.createElement('textarea'), {value: scriptFinal});
+  catch { const ta = Object.assign(document.createElement('textarea'), {value:scriptFinal});
     document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); }
   btnCopyResult.textContent = '✅ Copiado!';
   setTimeout(() => { btnCopyResult.textContent = '📋 Copiar Script Preenchido'; }, 2000);
