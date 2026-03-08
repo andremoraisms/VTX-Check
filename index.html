@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VX Check Web</title>
+    <link rel="icon" type="image/x-icon" href="vtx.ico">
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
@@ -12,10 +15,16 @@
 <div class="container">
     <h2>Scanner de Aparelhos</h2>
     
-    <video id="camera" autoplay playsinline></video>
-    <canvas id="canvas" style="display:none;"></canvas>
+    <div class="image-wrapper" id="imageWrapper">
+        <span id="placeholderText">Nenhuma foto selecionada</span>
+        <img id="imagePreview" style="display:none;" alt="Pré-visualização">
+    </div>
 
-    <div id="statusMsg" class="status">Aguardando câmera...</div>
+    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+    
+    <button id="btnUpload" class="btn-secondary">📁 Escolher ou Tirar Foto</button>
+
+    <div id="statusMsg" class="status">Aguardando imagem...</div>
 
     <label><strong>Script de Colagem:</strong></label>
     <textarea id="scriptTemplate">SMARTPHONE {MODELO DO CELULAR}
@@ -23,7 +32,7 @@ SN: {SERIE}
 IMEI 1: {IMEI 1}
 IMEI 2: {IMEI 2}</textarea>
 
-    <button id="btnCapturar">📸 Capturar e Copiar Texto</button>
+    <button id="btnCapturar" disabled>🪄 Extrair e Copiar Texto</button>
 
     <div id="resultado"></div>
 </div>
