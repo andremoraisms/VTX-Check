@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VX Check Web</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h2>Scanner de Aparelhos</h2>
+    
+    <video id="camera" autoplay playsinline></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <div id="statusMsg" class="status">Aguardando câmera...</div>
+
+    <label><strong>Script de Colagem:</strong></label>
+    <textarea id="scriptTemplate">SMARTPHONE {MODELO DO CELULAR}
+SN: {SERIE}
+IMEI 1: {IMEI 1}
+IMEI 2: {IMEI 2}</textarea>
+
+    <button id="btnCapturar">📸 Capturar e Copiar Texto</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
