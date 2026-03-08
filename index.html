@@ -1,41 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VTX Check Web</title>
-    <link rel="icon" type="image/x-icon" href="vtx.ico">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0d0d0d">
+  <title>VTX Check Web</title>
+  <link rel="icon" type="image/x-icon" href="vtx.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
 
-<div class="container">
-    <h2 style="color: #d32f2f;">VTX Check Web</h2>
-    
-    <div class="image-wrapper" id="imageWrapper">
-        <span id="placeholderText">Nenhuma foto selecionada</span>
-        <img id="imagePreview" style="display:none;" alt="Pré-visualização">
+<!-- SHELL MOBILE: ocupa toda a tela, sem scroll externo -->
+<div class="app-shell">
+
+  <!-- HEADER fixo no topo -->
+  <header class="header">
+    <div class="header-logo">VTX <span>Check</span> Web</div>
+    <div class="header-sub">Extrator de dados de dispositivo</div>
+  </header>
+
+  <!-- ÁREA COM SCROLL — cresce/encolhe conforme a tela -->
+  <main class="scroll-area">
+  <div class="container">
+
+    <!-- DROP ZONE -->
+    <div class="drop-zone" id="dropZone">
+      <div class="drop-placeholder" id="placeholderText">
+        <div class="drop-icon">📱</div>
+        <div class="drop-label">Toque para escolher ou fotografar</div>
+      </div>
+      <img id="imagePreview" alt="Pré-visualização">
+    </div>
+    <input type="file" id="imageInput" accept="image/*">
+
+    <!-- STATUS -->
+    <div class="status-bar" id="statusBar">
+      <div class="dot"></div>
+      <span id="statusMsg">Aguardando imagem...</span>
     </div>
 
-    <input type="file" id="imageInput" accept="image/*" style="display: none;">
-    
-    <button id="btnUpload" class="btn-secondary">📁 Escolher ou Tirar Foto</button>
+    <!-- PROGRESS -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
 
-    <div id="statusMsg" class="status">Aguardando imagem...</div>
-
-    <label><strong>Script de Colagem:</strong></label>
-    <textarea id="scriptTemplate">SMARTPHONE {MODELO DO CELULAR}
+    <!-- TEMPLATE -->
+    <div>
+      <div class="field-label">Modelo de Script</div>
+      <textarea id="scriptTemplate">SMARTPHONE {MODELO DO CELULAR}
 SN: {SERIE}
 IMEI 1: {IMEI 1}
 IMEI 2: {IMEI 2}</textarea>
+    </div>
 
-    <button id="btnCapturar" disabled>🪄 Extrair e Copiar Texto</button>
+    <!-- RESULTADO -->
+    <div class="result-box" id="resultBox">
+      <div class="result-header">
+        <span>Dados extraídos</span>
+        <span class="result-badge" id="resultBadge"></span>
+      </div>
+      <div class="result-fields" id="resultFields"></div>
+      <button class="btn-copy-result" id="btnCopyResult">📋 Copiar Script Preenchido</button>
+      <div class="result-raw">
+        <button class="raw-toggle" id="rawToggle">▶ Ver texto bruto do OCR</button>
+        <div class="raw-content" id="rawContent"></div>
+      </div>
+    </div>
 
-    <div id="resultado"></div>
+  </div>
+  </main>
+
+  <!-- BOTÕES fixos no rodapé -->
+  <footer class="footer-actions">
+    <button class="btn btn-upload" id="btnUpload">📁 Escolher / Fotografar</button>
+    <button class="btn btn-extract" id="btnCapturar" disabled>🪄 Extrair e Copiar</button>
+  </footer>
+
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
